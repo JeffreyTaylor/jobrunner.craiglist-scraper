@@ -1,4 +1,4 @@
-module.exports = function (city, category, keyword, name) {
+module.exports = function (city, category, keyword) {
 
     return {
         start: function () {
@@ -20,18 +20,17 @@ module.exports = function (city, category, keyword, name) {
 
                 return client.search(options, keyword, function (error, listings) {
 
+                    var identifier = '[ ' + category + '-' + city + '-' + keyword + ' ]';
+
                     if (error) {
+                        console.log(identifier + ' encountered an error');
                         console.log(error);
                         return;
                     }
 
-                    var identifier = category + '-' + city;
-
                     console.log(identifier + ' returned ' + listings.length + ' results');
 
-                    listings.forEach(function (listing) {
-                        repository.save(listing, identifier);
-                    });
+                    repository.saveAll(listings, identifier);
 
                     resolve();
                 });
