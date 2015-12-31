@@ -19,7 +19,7 @@ module.exports = function () {
             query.findOne(function (err, listing) {
                 if (err) {
                     console.log(name + " MongoDB Error: " + err);
-                    return false;
+                    return;
                 }
                 if (!listing) {
 
@@ -29,12 +29,10 @@ module.exports = function () {
                         } else {
                             console.log(name + ' saved! ' + aPost.pid);
                         }
-                        return true;
-
                     });
-                } else {
+                }
+                else {
                     console.log(name + ' ' + aPost.pid + ' already exists');
-                    return true;
                 }
             });
         }
